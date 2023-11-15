@@ -30,7 +30,6 @@
         <revision>1.0.0</revision>
 
         <jetbrains-annotations.version>24.0.1</jetbrains-annotations.version>
-        <log4j.version>2.20.0</log4j.version>
 
         <junit.version>5.10.0</junit.version>
         <assertj.version>3.24.2</assertj.version>
@@ -48,14 +47,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-bom</artifactId>
-                <version>${log4j.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -96,16 +87,6 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
         </dependency>
 
         <dependency>
