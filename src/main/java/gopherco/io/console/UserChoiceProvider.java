@@ -1,7 +1,8 @@
 package gopherco.io.console;
 
 public class UserChoiceProvider {
-    private static final String NON_INT_INPUT = "Error occurred! You should enter a number for a menu item entry but input was: %s%n";
+    private static final String NON_INT_INPUT =
+        "Error occurred! You should enter a number for a menu item entry but input was: %s%n";
     private static final String INPUT_LESSER_THAN_ZERO = "Your choice can not be lesser than 0. The choice was: %d%n";
     private final StringInput input;
 

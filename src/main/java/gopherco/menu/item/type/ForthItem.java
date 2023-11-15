@@ -51,9 +51,9 @@ public record ForthItem(int position, String title, Menu nextMenu) implements It
 
     @Override
     public String toString() {
-        return "ForthItem{" +
-            "position=" + position +
-            ", title='" + title + '\'' +
-            '}';
+        return "ForthItem{"
+            + "position=" + position
+            + ", title='" + title + '\''
+            + '}';
     }
 }

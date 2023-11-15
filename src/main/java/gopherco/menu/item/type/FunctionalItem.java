@@ -47,8 +47,8 @@ public record FunctionalItem(int position, String title, ItemHandler itemHandler
             return false;
         }
         FunctionalItem that = (FunctionalItem) o;
-        return position == that.position && Objects.equals(title, that.title) &&
-            Objects.equals(itemHandler, that.itemHandler);
+        return position == that.position && Objects.equals(title, that.title)
+            && Objects.equals(itemHandler, that.itemHandler);
     }
 
     @Override

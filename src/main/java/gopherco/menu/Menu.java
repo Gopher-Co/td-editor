@@ -89,8 +89,8 @@ public final class Menu {
             return false;
         }
         var that = (Menu) obj;
-        return Objects.equals(this.parent, that.parent) &&
-            Objects.equals(this.title, that.title);
+        return Objects.equals(this.parent, that.parent)
+            && Objects.equals(this.title, that.title);
     }
 
     @Override
@@ -100,8 +100,8 @@ public final class Menu {
 
     @Override
     public String toString() {
-        return "Menu[" +
-            "parent=" + parent + ", " +
-            "title=" + title + ", ";
+        return "Menu["
+            + "parent=" + parent + ", "
+            + "title=" + title + ", ";
     }
 }

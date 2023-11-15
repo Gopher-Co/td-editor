@@ -3,12 +3,16 @@ package gopherco.menu.context;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class ApplicationContext {
-    private static final ApplicationContext context = new ApplicationContext();
+    private static ApplicationContext applicationContext = new ApplicationContext();
     private final AtomicBoolean running = new AtomicBoolean(true);
+
     private ApplicationContext() {}
 
     public static ApplicationContext getInstance() {
-        return context;
+        if (applicationContext == null) {
+            applicationContext = new ApplicationContext();
+        }
+        return applicationContext;
     }
 
     public void shutdown() {

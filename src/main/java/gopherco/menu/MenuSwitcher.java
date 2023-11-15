@@ -4,9 +4,12 @@ import gopherco.io.console.UserChoiceProvider;
 import gopherco.menu.context.map.ContextKey;
 import gopherco.menu.context.map.MapContext;
 import gopherco.menu.render.Renderer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MenuSwitcher {
     private static final String INVITATION = "Enter your choice: ";
+    private static final Logger LOGGER = LogManager.getLogger();
     private final Menu initialMenu;
     private final Renderer renderer;
     private final UserChoiceProvider userChoiceProvider;
@@ -26,7 +29,8 @@ public class MenuSwitcher {
         Menu currentMenu = mapContext.<Menu>get(ContextKey.CURRENT_MENU)
             .orElseGet(this::initMapContextWithInitialMenu);
         renderer.render(currentMenu);
-        System.out.print(INVITATION);
+
+        LOGGER.info(INVITATION);
         int userNumber;
         try {
             userNumber = userChoiceProvider.get();
