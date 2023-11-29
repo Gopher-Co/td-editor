@@ -11,9 +11,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import gopherco.configs.tower.ProjectileConfig;
 import gopherco.configs.tower.TowerConfig;
-import gopherco.configs.tower.UpgradeConfig;
+import gopherco.configs.tower.Upgrade;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +24,13 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String name = jsonObject.get("name").getAsString();
         JsonArray upgradesJson = jsonObject.getAsJsonArray("upgrades");
-        List<UpgradeConfig> upgrades = new ArrayList<>();
+        List<Upgrade> upgrades = new ArrayList<>();
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(UpgradeConfig.class, new UpgradeConfigAdapter());
+        builder.registerTypeAdapter(Upgrade.class, new UpgradeAdapter());
         Gson gson = builder.create();
         for (var upgrade : upgradesJson) {
             var upgradeObject = upgrade.getAsJsonObject();
-            upgrades.add(gson.fromJson(upgradeObject, UpgradeConfig.class));
+            upgrades.add(gson.fromJson(upgradeObject, Upgrade.class));
         }
         int price = jsonObject.get("price").getAsInt();
         int typeAttack = jsonObject.get("type").getAsInt();
@@ -51,7 +50,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
             initialRadius,
             initialAttackSpeed,
             initialProjectileSpeed,
-            new ProjectileConfig(projectileName),
+            projectileName,
             level
         );
     }
@@ -60,13 +59,13 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
     public JsonElement serialize(TowerConfig towerConfig, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("name", new JsonPrimitive(towerConfig.name()));
-        List<UpgradeConfig> upgrades = towerConfig.upgrades();
+        List<Upgrade> upgrades = towerConfig.upgrades();
         JsonArray upgradesJson = new
             JsonArray(upgrades.size());
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(UpgradeConfig.class, new UpgradeConfigAdapter());
+        builder.registerTypeAdapter(Upgrade.class, new UpgradeAdapter());
         Gson gson = builder.create();
-        for (UpgradeConfig config : upgrades) {
+        for (Upgrade config : upgrades) {
             upgradesJson.add(gson.toJsonTree(config));
         }
         jsonObject.add("upgrades", upgradesJson);
@@ -77,7 +76,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
         jsonObject.add("initial_speed_attack", new JsonPrimitive(towerConfig.initialAttackSpeed()));
         jsonObject.add("init_projectile_speed", new JsonPrimitive(towerConfig.initialProjectileSpeed()));
         JsonObject projectileConfig = new JsonObject();
-        projectileConfig.add("name", new JsonPrimitive(towerConfig.projectileConfig().name()));
+        projectileConfig.add("name", new JsonPrimitive(towerConfig.projectileName()));
         jsonObject.add("projectile_config", projectileConfig);
         jsonObject.add("open_level", new JsonPrimitive(towerConfig.level()));
         return jsonObject;
