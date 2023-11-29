@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import static gopherco.serialization.util.SerializationTools.convertColorToString;
 
 public class MapConfigAdapter implements JsonSerializer<MapConfig>, JsonDeserializer<MapConfig> {
     @Override
@@ -54,9 +55,5 @@ public class MapConfigAdapter implements JsonSerializer<MapConfig>, JsonDeserial
         }
         jsonObject.add("path", jsonArray);
         return jsonObject;
-    }
-
-    private static String convertColorToString(Color color) {
-        return "#"+Integer.toHexString(color.getRGB()).substring(2);
     }
 }
