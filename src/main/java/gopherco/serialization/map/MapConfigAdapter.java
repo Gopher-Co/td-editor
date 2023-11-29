@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static gopherco.serialization.util.SerializationTools.convertColorToString;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class MapConfigAdapter implements JsonSerializer<MapConfig>, JsonDeserializer<MapConfig> {
     @Override
     public MapConfig deserialize(

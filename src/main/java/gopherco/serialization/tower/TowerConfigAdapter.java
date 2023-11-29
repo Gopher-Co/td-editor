@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDeserializer<TowerConfig> {
     @Override
     public TowerConfig deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context)

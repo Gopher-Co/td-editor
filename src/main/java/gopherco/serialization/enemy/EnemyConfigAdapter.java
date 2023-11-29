@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class EnemyConfigAdapter implements JsonSerializer<EnemyConfig>, JsonDeserializer<EnemyConfig> {
     @Override
     public EnemyConfig deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context)

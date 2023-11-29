@@ -11,6 +11,7 @@ import com.google.gson.JsonSerializer;
 import gopherco.configs.enemy.Weakness;
 import java.lang.reflect.Type;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class WeaknessAdapter implements JsonSerializer<Weakness>, JsonDeserializer<Weakness> {
     @Override
     public Weakness deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context)

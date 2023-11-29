@@ -2,7 +2,7 @@ package gopherco.configs.map;
 
 import java.util.List;
 
-public record Path (List<Point> path) {
+public record Path(List<Point> path) {
     public Path(List<Point> path) {
         if (path == null) {
             throw new IllegalArgumentException();

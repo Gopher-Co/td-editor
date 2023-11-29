@@ -8,6 +8,6 @@ public class SerializationTools {
     }
 
     public static String convertColorToString(Color color) {
-        return "#"+Integer.toHexString(color.getRGB()).substring(2);
+        return "#" + Integer.toHexString(color.getRGB()).substring(2);
     }
 }

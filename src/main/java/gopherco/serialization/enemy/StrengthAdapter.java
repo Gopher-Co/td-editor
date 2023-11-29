@@ -9,9 +9,9 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import gopherco.configs.enemy.Strength;
-import gopherco.configs.tower.Upgrade;
 import java.lang.reflect.Type;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class StrengthAdapter implements JsonSerializer<Strength>, JsonDeserializer<Strength> {
     @Override
     public Strength deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context)

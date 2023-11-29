@@ -11,6 +11,7 @@ import com.google.gson.JsonSerializer;
 import gopherco.configs.tower.Upgrade;
 import java.lang.reflect.Type;
 
+@SuppressWarnings("MultipleStringLiterals")
 public class UpgradeAdapter implements JsonSerializer<Upgrade>, JsonDeserializer<Upgrade> {
     @Override
     public Upgrade deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context)
