@@ -1,0 +1,23 @@
+{
+    "name": "#ab0ba0",
+    "max_health": 10,
+    "damage": 3,
+    "vrms": 1.0,
+    "money_award": 2,
+    "strengths": [{
+        "type": 1,
+        "dec_dmg": 2
+    },
+    {
+        "type": 2,
+        "dec_dmg": 1
+    }],
+    "weaknesses": [{
+        "type": 1,
+        "inc_dmg": 3
+    },
+    {
+        "type": 2,
+        "inc_dmg": 2
+    }]
+}

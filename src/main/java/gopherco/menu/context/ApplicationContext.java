@@ -1,12 +1,22 @@
 package gopherco.menu.context;
 
+import gopherco.configs.tower.TowerConfig;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class ApplicationContext {
     private static ApplicationContext applicationContext = new ApplicationContext();
     private final AtomicBoolean running = new AtomicBoolean(true);
+    private final List<TowerConfig> towerConfigs;
 
-    private ApplicationContext() {}
+    public List<TowerConfig> getTowerConfigs() {
+        return towerConfigs;
+    }
+
+    private ApplicationContext() {
+        towerConfigs = new ArrayList<>();
+    }
 
     public static ApplicationContext getInstance() {
         if (applicationContext == null) {
