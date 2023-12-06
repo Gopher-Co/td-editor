@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-public final class Menu {
+public sealed class Menu permits MapCreator {
     private Menu parent;
     private final String title;
     private final List<Item> items;
