@@ -76,14 +76,18 @@ public class SerializationTools {
         }
     }
 
-    public static void saveEntity(Path pathToConfigs, Gson gson, NamedConfig config, String extension) throws IOException {
-        if (config == null) return;
+    public static void saveEntity(Path pathToConfigs, Gson gson, NamedConfig config, String extension)
+        throws IOException {
+        if (config == null) {
+            return;
+        }
         Path file = pathToConfigs.resolve(config.getName()).resolve(extension);
         Files.createFile(file);
         Files.writeString(file, gson.toJson(config));
     }
 
-    public static void saveEntities(Path pathToConfigs, String extension, List<? extends NamedConfig> configs) throws IOException {
+    public static void saveEntities(Path pathToConfigs, String extension, List<? extends NamedConfig> configs)
+        throws IOException {
         Gson gson = EditorGson.getInstance();
         for (NamedConfig config : configs) {
             saveEntity(pathToConfigs, gson, config, extension);

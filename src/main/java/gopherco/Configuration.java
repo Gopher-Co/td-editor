@@ -21,11 +21,11 @@ import static gopherco.serialization.util.SerializationTools.saveUi;
 import static java.lang.System.getProperty;
 
 public class Configuration {
-    private static final String enemiesFolder = "Enemies";
-    private static final String levelsFolder = "Levels";
-    private static final String mapsFolder = "Maps";
-    private static final String towersFolder = "Towers";
-    private static final String uiFolder = "UI";
+    private static final String ENEMIES_FOLDER = "Enemies";
+    private static final String LEVELS_FOLDER = "Levels";
+    private static final String MAPS_FOLDER = "Maps";
+    private static final String TOWERS_FOLDER = "Towers";
+    private static final String UI_FOLDER = "UI";
     private static Configuration instance;
     private final Path pathToJar;
     private final Path pathToEnemies;
@@ -44,11 +44,11 @@ public class Configuration {
 //            pathToJar = Paths.get(Test.class.getProtectionDomain().getCodeSource().getLocation()
 //                .toURI());
             pathToJar = Path.of(getProperty("user.dir"));
-            pathToEnemies = pathToJar.resolve(enemiesFolder);
-            pathToLevels = pathToJar.resolve(levelsFolder);
-            pathToMaps = pathToJar.resolve(mapsFolder);
-            pathToTowers = pathToJar.resolve(towersFolder);
-            pathToUi = pathToJar.resolve(uiFolder);
+            pathToEnemies = pathToJar.resolve(ENEMIES_FOLDER);
+            pathToLevels = pathToJar.resolve(LEVELS_FOLDER);
+            pathToMaps = pathToJar.resolve(MAPS_FOLDER);
+            pathToTowers = pathToJar.resolve(TOWERS_FOLDER);
+            pathToUi = pathToJar.resolve(UI_FOLDER);
             enemies = new ArrayList<>();
             levels = new ArrayList<>();
             maps = new ArrayList<>();

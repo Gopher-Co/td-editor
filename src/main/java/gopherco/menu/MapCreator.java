@@ -36,9 +36,9 @@ public final class MapCreator extends Menu {
 
     public void addColor() {
         System.out.println("Enter a color as an integer");
-        String color = input.read();
+        String colorInput = input.read();
         try {
-            this.color = Color.decode(color);
+            this.color = Color.decode(colorInput);
         } catch (NumberFormatException e) {
             System.out.println("Wrong color format");
         }
@@ -46,13 +46,13 @@ public final class MapCreator extends Menu {
 
     public void addName() {
         System.out.println("Enter a map name. Use latin letters, digits and underscore only");
-        String name = input.read();
-        if (!name.matches(FILE_REGEX)) {
+        String nameInput = input.read();
+        if (!nameInput.matches(FILE_REGEX)) {
             System.out.println("Incorrect file name. Use latin letters, digits and underscore only");
-        } else if (configuration.existsMap(name)) {
+        } else if (configuration.existsMap(nameInput)) {
             System.out.println("Map name already occupied");
         } else {
-            this.name = name;
+            this.name = nameInput;
         }
     }
 

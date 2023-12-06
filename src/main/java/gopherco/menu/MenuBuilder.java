@@ -6,7 +6,6 @@ import gopherco.menu.context.ApplicationContext;
 import gopherco.menu.item.type.ForthItem;
 import gopherco.menu.item.type.FunctionalItem;
 import gopherco.menu.item.type.ShutdownItem;
-import static gopherco.configs.ConfigView.showMap;
 import static gopherco.configs.ConfigView.showMaps;
 import static gopherco.menu.MapCreator.setupMapCreationMenu;
 
