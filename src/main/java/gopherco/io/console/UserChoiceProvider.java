@@ -1,5 +1,7 @@
 package gopherco.io.console;
 
+import gopherco.io.StringInput;
+
 public class UserChoiceProvider {
     private static final String NON_INT_INPUT =
         "Error occurred! You should enter a number for a menu item entry but input was: %s%n";

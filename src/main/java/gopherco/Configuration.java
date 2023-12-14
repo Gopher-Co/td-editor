@@ -7,7 +7,10 @@ import gopherco.configs.tower.TowerConfig;
 import gopherco.configs.ui.UiConfig;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import static gopherco.serialization.util.SerializationTools.loadEnemies;
 import static gopherco.serialization.util.SerializationTools.loadLevels;
 import static gopherco.serialization.util.SerializationTools.loadMaps;
@@ -33,10 +36,10 @@ public class Configuration {
     private final Path pathToMaps;
     private final Path pathToTowers;
     private final Path pathToUi;
-    private final List<EnemyConfig> enemies;
-    private final List<LevelConfig> levels;
-    private final List<MapConfig> maps;
-    private final List<TowerConfig> towers;
+    private final Map<String, EnemyConfig> enemies;
+    private final Map<String, LevelConfig> levels;
+    private final Map<String, MapConfig> maps;
+    private final Map<String, TowerConfig> towers;
     private UiConfig ui;
 
     private Configuration() {
@@ -49,10 +52,10 @@ public class Configuration {
             pathToMaps = pathToJar.resolve(MAPS_FOLDER);
             pathToTowers = pathToJar.resolve(TOWERS_FOLDER);
             pathToUi = pathToJar.resolve(UI_FOLDER);
-            enemies = new ArrayList<>();
-            levels = new ArrayList<>();
-            maps = new ArrayList<>();
-            towers = new ArrayList<>();
+            enemies = new HashMap<>();
+            levels = new HashMap<>();
+            maps = new HashMap<>();
+            towers = new HashMap<>();
 //        } catch (URISyntaxException e) {
 //            throw new RuntimeException(e);
 //        }
@@ -70,36 +73,36 @@ public class Configuration {
     }
 
     public void loadEntities() {
-        enemies.addAll(loadEnemies(pathToEnemies));
-        levels.addAll(loadLevels(pathToLevels));
-        maps.addAll(loadMaps(pathToMaps));
-        towers.addAll(loadTowers(pathToTowers));
+        enemies.putAll(loadEnemies(pathToEnemies));
+        levels.putAll(loadLevels(pathToLevels));
+        maps.putAll(loadMaps(pathToMaps));
+        towers.putAll(loadTowers(pathToTowers));
         if (ui == null) {
             ui = loadUi(pathToUi);
         }
     }
 
     public void saveEntities() {
-        saveEnemies(getEnemies(), pathToEnemies);
-        saveLevels(getLevels(), pathToLevels);
-        saveMaps(getMaps(), pathToMaps);
-        saveTowers(getTowers(), pathToTowers);
+        saveEnemies(getEnemies().values(), pathToEnemies);
+        saveLevels(getLevels().values(), pathToLevels);
+        saveMaps(getMaps().values(), pathToMaps);
+        saveTowers(getTowers().values(), pathToTowers);
         saveUi(getUi(), pathToUi);
     }
 
-    public List<EnemyConfig> getEnemies() {
+    public Map<String, EnemyConfig> getEnemies() {
         return enemies;
     }
 
-    public List<LevelConfig> getLevels() {
+    public Map<String, LevelConfig> getLevels() {
         return levels;
     }
 
-    public List<MapConfig> getMaps() {
+    public Map<String, MapConfig> getMaps() {
         return maps;
     }
 
-    public List<TowerConfig> getTowers() {
+    public Map<String, TowerConfig> getTowers() {
         return towers;
     }
 
@@ -114,7 +117,7 @@ public class Configuration {
     }
 
     public void addMap(MapConfig map) {
-        maps.add(map);
+        maps.put(map.name(), map);
     }
 
     public void addTower(TowerConfig tower) {

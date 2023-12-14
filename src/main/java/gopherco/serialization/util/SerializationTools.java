@@ -9,10 +9,16 @@ import gopherco.configs.tower.TowerConfig;
 import gopherco.configs.ui.UiConfig;
 import java.awt.Color;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SerializationTools {
     private static final String GLOB_TEMPLATE = "*";
@@ -35,11 +41,15 @@ public class SerializationTools {
         return "#" + Integer.toHexString(color.getRGB()).substring(2);
     }
 
-    public static <T> T loadEntity(Path file, Gson gson, Class<T> configClass) throws IOException {
+    public static <T extends NamedConfig> T loadEntity(Path file, Gson gson, Class<T> configClass) throws IOException {
         return gson.fromJson(Files.readString(file), configClass);
     }
 
-    public static <T> List<T> loadEntities(Path pathToConfigs, String glob, Class<T> configClass) {
+    public static <T extends NamedConfig> Map<String, T> loadEntities(
+        Path pathToConfigs,
+        String glob,
+        Class<T> configClass
+    ) {
         List<T> result = new ArrayList<>();
         Gson gson = EditorGson.getInstance();
         try (var stream = Files.newDirectoryStream(pathToConfigs, glob)) {
@@ -48,31 +58,38 @@ public class SerializationTools {
             }
         } catch (IOException ignored) {
         }
-        return result;
+        try {
+            return result.stream()
+                .collect(Collectors.toMap(NamedConfig::getName, Function.identity()));
+        } catch (IllegalStateException e) {
+            return new HashMap<>();
+        }
     }
 
-    public static List<EnemyConfig> loadEnemies(Path pathToConfigs) {
+    public static Map<String, EnemyConfig> loadEnemies(Path pathToConfigs) {
         return loadEntities(pathToConfigs, ENEMIES_GLOB, EnemyConfig.class);
     }
 
-    public static List<LevelConfig> loadLevels(Path pathToConfigs) {
+    public static Map<String, LevelConfig> loadLevels(Path pathToConfigs) {
         return loadEntities(pathToConfigs, LEVELS_GLOB, LevelConfig.class);
     }
 
-    public static List<MapConfig> loadMaps(Path pathToConfigs) {
+    public static Map<String, MapConfig> loadMaps(Path pathToConfigs) {
         return loadEntities(pathToConfigs, MAPS_GLOB, MapConfig.class);
     }
 
-    public static List<TowerConfig> loadTowers(Path pathToConfigs) {
+    public static Map<String, TowerConfig> loadTowers(Path pathToConfigs) {
         return loadEntities(pathToConfigs, TOWERS_GLOB, TowerConfig.class);
     }
 
     public static UiConfig loadUi(Path pathToConfigs) {
-        List<UiConfig> configs = loadEntities(pathToConfigs, UI_GLOB, UiConfig.class);
+        Map<String, UiConfig> configs = loadEntities(pathToConfigs, UI_GLOB, UiConfig.class);
         if (configs.size() != 1) {
             return null;
         } else {
-            return configs.getFirst();
+            return configs.values().stream()
+                .findAny()
+                .get();
         }
     }
 
@@ -81,12 +98,15 @@ public class SerializationTools {
         if (config == null) {
             return;
         }
-        Path file = pathToConfigs.resolve(config.getName()).resolve(extension);
-        Files.createFile(file);
+        Path file = pathToConfigs.resolve(config.getName() + extension);
+        try {
+            Files.createFile(file);
+        } catch (FileAlreadyExistsException ignored) {
+        }
         Files.writeString(file, gson.toJson(config));
     }
 
-    public static void saveEntities(Path pathToConfigs, String extension, List<? extends NamedConfig> configs)
+    public static void saveEntities(Path pathToConfigs, String extension, Collection<? extends NamedConfig> configs)
         throws IOException {
         Gson gson = EditorGson.getInstance();
         for (NamedConfig config : configs) {
@@ -94,7 +114,7 @@ public class SerializationTools {
         }
     }
 
-    public static void saveEnemies(List<EnemyConfig> enemies, Path pathToConfigs) {
+    public static void saveEnemies(Collection<EnemyConfig> enemies, Path pathToConfigs) {
         try {
             saveEntities(pathToConfigs, ENEMIES_EXTENSION, enemies);
         } catch (IOException e) {
@@ -102,7 +122,7 @@ public class SerializationTools {
         }
     }
 
-    public static void saveLevels(List<LevelConfig> levels, Path pathToConfigs) {
+    public static void saveLevels(Collection<LevelConfig> levels, Path pathToConfigs) {
         try {
             saveEntities(pathToConfigs, LEVELS_EXTENSION, levels);
         } catch (IOException e) {
@@ -110,7 +130,7 @@ public class SerializationTools {
         }
     }
 
-    public static void saveMaps(List<MapConfig> maps, Path pathToConfigs) {
+    public static void saveMaps(Collection<MapConfig> maps, Path pathToConfigs) {
         try {
             saveEntities(pathToConfigs, MAPS_EXTENSION, maps);
         } catch (IOException e) {
@@ -118,7 +138,7 @@ public class SerializationTools {
         }
     }
 
-    public static void saveTowers(List<TowerConfig> towers, Path pathToConfigs) {
+    public static void saveTowers(Collection<TowerConfig> towers, Path pathToConfigs) {
         try {
             saveEntities(pathToConfigs, TOWERS_EXTENSION, towers);
         } catch (IOException e) {
@@ -129,7 +149,8 @@ public class SerializationTools {
     public static void saveUi(UiConfig ui, Path pathToConfigs) {
         try {
             saveEntities(pathToConfigs, UI_EXTENSION, List.of(ui));
-        } catch (Exception e) {
+        } catch (NullPointerException ignored) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

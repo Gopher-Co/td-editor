@@ -1,13 +1,11 @@
 package gopherco.menu;
 
 import gopherco.Configuration;
-import gopherco.io.console.StringInput;
+import gopherco.menu.configcreators.map.MapMenu;
 import gopherco.menu.context.ApplicationContext;
 import gopherco.menu.item.type.ForthItem;
 import gopherco.menu.item.type.FunctionalItem;
 import gopherco.menu.item.type.ShutdownItem;
-import static gopherco.configs.ConfigView.showMaps;
-import static gopherco.menu.MapCreator.setupMapCreationMenu;
 
 public class MenuBuilder {
     private static final String MAIN_MENU = "Main menu";
@@ -19,22 +17,20 @@ public class MenuBuilder {
     private static final String CONFIGS_SAVED = "Configs saved";
     private static final String SHOW_MAPS = "Show in-memory maps";
     private final ItemInserter itemInserter;
-    private final StringInput input;
     private final Configuration configuration;
 
-    public MenuBuilder(ApplicationContext applicationContext, StringInput input, Configuration configuration) {
+    public MenuBuilder(ApplicationContext applicationContext, Configuration configuration) {
         this.itemInserter = new ItemInserter(title -> new ShutdownItem(title, applicationContext));
-        this.input = input;
         this.configuration = configuration;
     }
 
     public Menu build() {
         Menu mainMenu = new Menu(MAIN_MENU, true);
         Menu mapMenu = new Menu(MAP_MENU);
-        MapCreator mapCreationMenu = new MapCreator(MAP_CREATION_MENU, configuration);
+        MapMenu mapCreationMenu = new MapMenu(MAP_CREATION_MENU, configuration);
         setupMainMenu(mainMenu, mapMenu);
         setupMapMenu(mapMenu, mapCreationMenu);
-        setupMapCreationMenu(itemInserter, mapCreationMenu);
+        mapCreationMenu.setupCreationMenu(itemInserter);
         return mainMenu;
     }
 
@@ -53,9 +49,12 @@ public class MenuBuilder {
             .clear();
     }
 
-    private void setupMapMenu(Menu mapMenu, Menu mapCreationMenu) {
+    private void setupMapMenu(Menu mapMenu, MapMenu mapCreationMenu) {
         itemInserter
-            .add(new FunctionalItem(SHOW_MAPS, context -> showMaps(configuration.getMaps())))
+            .add(new FunctionalItem(
+                SHOW_MAPS,
+                context -> mapCreationMenu.getView().viewConfigs(configuration.getMaps().values())
+            ))
             .add(new ForthItem(MAP_CREATION_MENU, mapCreationMenu))
             .insert(mapMenu)
             .clear();
