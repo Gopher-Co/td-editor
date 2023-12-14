@@ -14,7 +14,7 @@ public class MapMenuView extends ConfigMenuView<MapConfig> {
     private static final String SUBMITTING_FAILED = "Couldn't add the map! Fill all the fields";
     private static final String TAKE_POINT_INIT = "Enter a point: 2 floating point numbers divided by a space";
     private static final String TAKE_POINT_ARGS = "Enter exactly 2 numbers";
-    private static final String TAKE_POINT_FORMAT = "Enter exactly 2 numbers";
+    private static final String TAKE_POINT_FORMAT = TAKE_POINT_ARGS;
     private static final String DELETE_MAP_SUCCESS = "Map deleted";
     private static final String DELETE_MAP_FAILED = "Map never existed";
     private static final String COLOR_INCORRECT = "Incorrect color field in the current config";

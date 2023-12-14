@@ -1,7 +1,6 @@
 package gopherco.menu.configcreators;
 
 import gopherco.configs.NamedConfig;
-import gopherco.configs.map.MapConfig;
 import java.util.Collection;
 
 public abstract class ConfigMenuView<T extends NamedConfig> {
