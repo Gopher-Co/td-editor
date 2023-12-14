@@ -10,9 +10,12 @@ public class UiMenuView extends ConfigMenuView<UiConfig> {
 
     private static final String UI_ANNOUNCE = "Here is the UI you've already built: ";
     private static final String SUBMITTING_FAILED = "Couldn't add the ui! Fill all the fields";
+
     @Override
     public void viewConfig(UiConfig config) {
-        if (config == null) return;
+        if (config == null) {
+            return;
+        }
         System.out.println(UI_ANNOUNCE);
         System.out.println();
         System.out.println("Color of the button Play in the main menu: " + config.menuButtonPlayColor());
