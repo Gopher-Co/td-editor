@@ -100,6 +100,7 @@ public class SerializationTools {
         }
         Path file = pathToConfigs.resolve(config.getName() + extension);
         try {
+            Files.createDirectories(pathToConfigs);
             Files.createFile(file);
         } catch (FileAlreadyExistsException ignored) {
         }

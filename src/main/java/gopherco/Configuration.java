@@ -107,35 +107,7 @@ public class Configuration {
         return ui;
     }
 
-    public void addEnemy(EnemyConfig enemy) {
-    }
-
-    public void addLevel(LevelConfig level) {
-    }
-
-    public void addMap(MapConfig map) {
-        maps.put(map.name(), map);
-    }
-
-    public void addTower(TowerConfig tower) {
-    }
-
     public void addUi(UiConfig ui) {
-    }
-
-    public boolean existsMap(String name) {
-        return false;
-    }
-
-    public boolean existsEnemy(String name) {
-        return false;
-    }
-
-    public boolean existsLevel(String name) {
-        return false;
-    }
-
-    public boolean existsTower(String name) {
-        return false;
+        this.ui = ui;
     }
 }

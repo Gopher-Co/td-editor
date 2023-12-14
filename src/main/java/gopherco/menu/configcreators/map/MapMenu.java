@@ -43,7 +43,7 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
         String nameInput = readInput();
         if (!nameInput.matches(FILE_REGEX)) {
             view.viewAddNameWrong();
-        } else if (getConfiguration().existsMap(nameInput)) {
+        } else if (getConfiguration().getMaps().containsKey(nameInput)) {
             view.viewAddNameOccupied();
         } else {
             this.name = nameInput;
@@ -106,7 +106,6 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
         return correct;
     }
 
-    @Override
     public MapMenuView getView() {
         return (MapMenuView) super.getView();
     }

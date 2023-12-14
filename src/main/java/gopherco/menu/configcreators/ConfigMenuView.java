@@ -13,5 +13,4 @@ public abstract class ConfigMenuView<T extends NamedConfig> {
     public abstract void viewDeleteConfigSuccess();
 
     public abstract void viewDeleteConfigFailed();
-
 }
