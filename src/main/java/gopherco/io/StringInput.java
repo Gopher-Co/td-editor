@@ -1,4 +1,4 @@
-package gopherco.io.console;
+package gopherco.io;
 
 public interface StringInput {
     String read();

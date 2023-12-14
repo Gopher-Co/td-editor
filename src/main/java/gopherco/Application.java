@@ -17,7 +17,7 @@ public class Application {
         Configuration configuration = Configuration.getInstance();
         ApplicationContext applicationContext = ApplicationContext.getInstance();
         ConsoleInput input = new ConsoleInput();
-        MenuBuilder menuBuilder = new MenuBuilder(applicationContext, input, configuration);
+        MenuBuilder menuBuilder = new MenuBuilder(applicationContext, configuration);
         Menu mainMenu = menuBuilder.build();
         MenuRenderer renderer = new MenuRenderer();
         MenuSwitcher menuSwitcher = new MenuSwitcher(mainMenu, renderer, new UserChoiceProvider(input));

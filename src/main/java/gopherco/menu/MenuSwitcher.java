@@ -4,6 +4,7 @@ import gopherco.io.console.UserChoiceProvider;
 import gopherco.menu.context.map.ContextKey;
 import gopherco.menu.context.map.MapContext;
 import gopherco.menu.render.Renderer;
+import java.util.NoSuchElementException;
 
 public class MenuSwitcher {
     private static final String INVITATION = "Enter your choice: ";
@@ -35,13 +36,16 @@ public class MenuSwitcher {
             System.err.println(iae.getMessage());
             return;
         }
-        currentMenu.getItems()
-            .stream()
-            .filter(item -> item.getPosition() == userNumber)
-            .findFirst()
-            .get()
-            .getItemHandler()
-            .handle(mapContext);
+        try {
+            currentMenu.getItems()
+                .stream()
+                .filter(item -> item.getPosition() == userNumber)
+                .findFirst()
+                .get()
+                .getItemHandler()
+                .handle(mapContext);
+        } catch (NoSuchElementException ignored) {
+        }
         mapContext.<Menu>get(ContextKey.NEXT_MENU)
             .ifPresent(nextMenu -> mapContext.put(ContextKey.CURRENT_MENU, nextMenu));
         mapContext.remove(ContextKey.NEXT_MENU);
