@@ -10,14 +10,17 @@ import gopherco.menu.item.type.FunctionalItem;
 import java.util.Map;
 
 public abstract class ConfigMenu<T extends NamedConfig> extends Menu {
+    private static final String ADD_NEW_NAME = "Set name";
     private static final String SHOW_CURRENT_CONFIG = "Show the config being built";
     private static final String CLEAR_STATE = "Clear state";
     private static final String SUBMIT = "Submit config";
     private static final String DELETE = "Delete in-memory config by name";
+    private static final String FILE_REGEX = "\\w+";
     private final StringInput input;
     private final Configuration configuration;
     private final Map<String, T> configs;
     private final ConfigMenuView<T> view;
+    protected String name;
 
     public ConfigMenu(String title, Configuration configuration, Map<String, T> configs, ConfigMenuView<T> view) {
         super(title);
@@ -25,6 +28,19 @@ public abstract class ConfigMenu<T extends NamedConfig> extends Menu {
         this.configs = configs;
         this.view = view;
         input = new ConsoleInput();
+    }
+
+    protected void addName() {
+        var view = getView();
+        view.viewAddNameInit();
+        String nameInput = readInput();
+        if (!nameInput.matches(FILE_REGEX)) {
+            view.viewAddNameWrong();
+        } else if (getConfiguration().getMaps().containsKey(nameInput)) {
+            view.viewAddNameOccupied();
+        } else {
+            this.name = nameInput;
+        }
     }
 
     protected void submit() {
@@ -66,6 +82,8 @@ public abstract class ConfigMenu<T extends NamedConfig> extends Menu {
     }
 
     public void setupCreationMenu(ItemInserter itemInserter) {
+        itemInserter
+            .add(new FunctionalItem(ADD_NEW_NAME, context -> addName()));
         setupCreationMenuExtended(itemInserter)
             .add(new FunctionalItem(
                 SHOW_CURRENT_CONFIG,

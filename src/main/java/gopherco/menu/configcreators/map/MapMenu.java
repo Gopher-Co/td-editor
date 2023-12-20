@@ -12,14 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class MapMenu extends ConfigMenu<MapConfig> {
-    private static final String ADD_NEW_NAME = "Set name";
     private static final String ADD_NEW_COLOR = "Set color";
     private static final String APPEND_TO_PATH = "Append point to path";
     private static final String ADD_TO_START_OF_PATH = "Add first point to path";
-    private static final String FILE_REGEX = "\\w+";
     private List<Point> path;
     private Color color;
-    private String name;
 
     public MapMenu(String title, Configuration configuration) {
         super(title, configuration, configuration.getMaps(), new MapMenuView());
@@ -34,19 +31,6 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
             this.color = Color.decode(colorInput);
         } catch (NumberFormatException e) {
             view.viewAddColorWrong();
-        }
-    }
-
-    private void addName() {
-        var view = getView();
-        view.viewAddNameInit();
-        String nameInput = readInput();
-        if (!nameInput.matches(FILE_REGEX)) {
-            view.viewAddNameWrong();
-        } else if (getConfiguration().getMaps().containsKey(nameInput)) {
-            view.viewAddNameOccupied();
-        } else {
-            this.name = nameInput;
         }
     }
 
@@ -80,6 +64,7 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
         }
     }
 
+    @Override
     protected void clearState() {
         color = null;
         name = null;
@@ -106,6 +91,7 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
         return correct;
     }
 
+    @Override
     public MapMenuView getView() {
         return (MapMenuView) super.getView();
     }
@@ -113,7 +99,6 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
     @Override
     protected ItemInserter setupCreationMenuExtended(ItemInserter itemInserter) {
         return itemInserter
-            .add(new FunctionalItem(ADD_NEW_NAME, context -> addName()))
             .add(new FunctionalItem(ADD_NEW_COLOR, context -> addColor()))
             .add(new FunctionalItem(APPEND_TO_PATH, context -> appendPointLast()))
             .add(new FunctionalItem(ADD_TO_START_OF_PATH, context -> addPointFirst()));

@@ -8,9 +8,6 @@ public class MapMenuView extends ConfigMenuView<MapConfig> {
     private static final String MAPS_ANNOUNCE = "Here are the maps you already have: ";
     private static final String ADD_COLOR_INIT = "Enter a color as an integer";
     private static final String ADD_COLOR_WRONG = "Wrong color format";
-    private static final String ADD_NAME_INIT = "Enter a map name. Use latin letters, digits and underscore only";
-    private static final String ADD_NAME_WRONG = "Incorrect file name. Use latin letters, digits and underscore only";
-    private static final String ADD_NAME_OCCUPIED = "Map name already occupied";
     private static final String SUBMITTING_FAILED = "Couldn't add the map! Fill all the fields";
     private static final String TAKE_POINT_INIT = "Enter a point: 2 floating point numbers divided by a space";
     private static final String TAKE_POINT_ARGS = "Enter exactly 2 numbers";
@@ -42,18 +39,6 @@ public class MapMenuView extends ConfigMenuView<MapConfig> {
 
     public void viewAddColorWrong() {
         System.out.println(ADD_COLOR_WRONG);
-    }
-
-    public void viewAddNameInit() {
-        System.out.println(ADD_NAME_INIT);
-    }
-
-    public void viewAddNameWrong() {
-        System.out.println(ADD_NAME_WRONG);
-    }
-
-    public void viewAddNameOccupied() {
-        System.out.println(ADD_NAME_OCCUPIED);
     }
 
     @Override
