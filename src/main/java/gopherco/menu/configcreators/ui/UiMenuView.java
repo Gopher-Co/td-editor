@@ -9,7 +9,6 @@ public class UiMenuView extends ConfigMenuView<UiConfig> {
     private static final String ADD_COLOR_WRONG = "Wrong color format";
 
     private static final String UI_ANNOUNCE = "Here is the UI you've already built: ";
-    private static final String SUBMITTING_FAILED = "Couldn't add the ui! Fill all the fields";
 
     @Override
     public void viewConfig(UiConfig config) {
@@ -29,11 +28,6 @@ public class UiMenuView extends ConfigMenuView<UiConfig> {
     @Override
     public void viewConfigs(Collection<UiConfig> configs) {
         throw new IllegalStateException();
-    }
-
-    @Override
-    public void viewSubmittingFailed() {
-        System.out.println(SUBMITTING_FAILED);
     }
 
     @Override

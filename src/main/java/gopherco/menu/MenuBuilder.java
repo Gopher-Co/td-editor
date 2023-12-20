@@ -2,6 +2,8 @@ package gopherco.menu;
 
 import gopherco.Configuration;
 import gopherco.menu.configcreators.enemy.EnemyMenu;
+import gopherco.menu.configcreators.level.LevelMenu;
+import gopherco.menu.configcreators.level.WaveMenu;
 import gopherco.menu.configcreators.map.MapMenu;
 import gopherco.menu.configcreators.ui.UiMenu;
 import gopherco.menu.context.ApplicationContext;
@@ -14,9 +16,11 @@ public class MenuBuilder {
     private static final String MAP_MENU = "Build Maps";
     private static final String UI_MENU = "Build UI";
     private static final String ENEMY_MENU = "Build Enemies";
+    private static final String LEVEL_MENU = "Build Levels";
     private static final String MAP_CREATION_MENU = "Creating maps";
     private static final String UI_CREATION_MENU = "Creating ui";
     private static final String ENEMY_CREATION_MENU = "Creating enemies";
+    private static final String LEVEL_CREATION_MENU = "Creating levels";
     private static final String LOAD_CONFIGS = "Load existing configurations";
     private static final String CONFIGS_LOADED = "Configurations loaded";
     private static final String SAVE_CONFIGS = "Save configs to FS";
@@ -24,6 +28,7 @@ public class MenuBuilder {
     private static final String SHOW_MAPS = "Show in-memory maps";
     private static final String SHOW_UI = "Show in-memory ui";
     private static final String SHOW_ENEMIES = "Show in-memory enemies";
+    private static final String SHOW_LEVELS = "Show in-memory levels";
     private final ItemInserter itemInserter;
     private final Configuration configuration;
 
@@ -40,21 +45,26 @@ public class MenuBuilder {
         UiMenu uiCreationMenu = new UiMenu(UI_CREATION_MENU, configuration);
         Menu enemyMenu = new Menu(ENEMY_MENU);
         EnemyMenu enemyCreationMenu = new EnemyMenu(ENEMY_CREATION_MENU, configuration);
-        setupMainMenu(mainMenu, mapMenu, uiMenu, enemyMenu);
+        Menu levelMenu = new Menu(LEVEL_MENU);
+        LevelMenu levelCreationMenu = new LevelMenu(LEVEL_CREATION_MENU, configuration);
+        setupMainMenu(mainMenu, mapMenu, uiMenu, enemyMenu, levelMenu);
         setupMapMenu(mapMenu, mapCreationMenu);
         setupUiMenu(uiMenu, uiCreationMenu);
         setupEnemyMenu(enemyMenu, enemyCreationMenu);
+        setupLevelMenu(levelMenu, levelCreationMenu);
         mapCreationMenu.setupCreationMenu(itemInserter);
         uiCreationMenu.setupCreationMenu(itemInserter);
         enemyCreationMenu.setupCreationMenu(itemInserter);
+        levelCreationMenu.setupCreationMenu(itemInserter);
         return mainMenu;
     }
 
-    private void setupMainMenu(Menu mainMenu, Menu mapMenu, Menu uiMenu, Menu enemyMenu) {
+    private void setupMainMenu(Menu mainMenu, Menu mapMenu, Menu uiMenu, Menu enemyMenu, Menu levelMenu) {
         itemInserter
             .add(new ForthItem(MAP_MENU, mapMenu))
             .add(new ForthItem(UI_MENU, uiMenu))
             .add(new ForthItem(ENEMY_MENU, enemyMenu))
+            .add(new ForthItem(LEVEL_MENU, levelMenu))
             .add(new FunctionalItem(SAVE_CONFIGS, context -> {
                 configuration.saveEntities();
                 System.out.println(CONFIGS_SAVED);
@@ -97,6 +107,17 @@ public class MenuBuilder {
             ))
             .add(new ForthItem(ENEMY_CREATION_MENU, enemyCreationMenu))
             .insert(enemyMenu)
+            .clear();
+    }
+
+    private void setupLevelMenu(Menu levelMenu, LevelMenu levelCreationMenu) {
+        itemInserter
+            .add(new FunctionalItem(
+                SHOW_LEVELS,
+                context -> levelCreationMenu.getView().viewConfigs(configuration.getLevels().values())
+            ))
+            .add(new ForthItem(LEVEL_CREATION_MENU, levelCreationMenu))
+            .insert(levelMenu)
             .clear();
     }
 }

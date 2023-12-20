@@ -2,13 +2,8 @@ package gopherco.menu.configcreators.enemy;
 
 import gopherco.configs.enemy.EnemyConfig;
 import gopherco.menu.configcreators.ConfigMenuView;
-import java.util.Collection;
 
 public class EnemyMenuView extends ConfigMenuView<EnemyConfig> {
-    private static final String ENEMIES_ANNOUNCE = "Here are the enemies you already have: ";
-    private static final String SUBMITTING_FAILED = "Couldn't add the enemy! Fill all the fields";
-    private static final String DELETE_ENEMY_SUCCESS = "Map deleted";
-    private static final String DELETE_ENEMY_FAILED = "Map never existed";
     private static final String NAME_INCORRECT = "Incorrect name field in the current config";
     private static final String MAX_HEALTH_INCORRECT = "Incorrect max health field in the current config";
     private static final String DAMAGE_INCORRECT = "Incorrect damage field in the current config";
@@ -34,29 +29,6 @@ public class EnemyMenuView extends ConfigMenuView<EnemyConfig> {
         System.out.println("Money award for killing: " + config.moneyAward());
         System.out.println("Strengths: " + config.strengths());
         System.out.println("Weaknesses: " + config.weaknesses());
-    }
-
-    @Override
-    public void viewConfigs(Collection<EnemyConfig> enemies) {
-        System.out.println(ENEMIES_ANNOUNCE);
-        for (var enemy : enemies) {
-            viewConfig(enemy);
-        }
-    }
-
-    @Override
-    public void viewSubmittingFailed() {
-        System.out.println(SUBMITTING_FAILED);
-    }
-
-    @Override
-    public void viewDeleteConfigSuccess() {
-        System.out.println(DELETE_ENEMY_SUCCESS);
-    }
-
-    @Override
-    public void viewDeleteConfigFailed() {
-        System.out.println(DELETE_ENEMY_FAILED);
     }
 
     public void viewNameIncorrect() {
