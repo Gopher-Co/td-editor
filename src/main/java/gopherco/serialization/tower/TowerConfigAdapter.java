@@ -13,9 +13,11 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import gopherco.configs.tower.TowerConfig;
 import gopherco.configs.tower.Upgrade;
+import java.awt.Color;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import static gopherco.serialization.util.SerializationTools.convertColorToString;
 
 @SuppressWarnings("MultipleStringLiterals")
 public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDeserializer<TowerConfig> {
@@ -41,7 +43,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
         double initialProjectileSpeed = jsonObject.get("init_projectile_speed").getAsInt();
         String projectileName = jsonObject
             .get("projectile_config").getAsJsonObject().get("name").getAsString();
-        int level = jsonObject.get("open_level").getAsInt();
+        String level = jsonObject.get("open_level").getAsString();
         return new TowerConfig(
             name,
             upgrades,
@@ -51,7 +53,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
             initialRadius,
             initialAttackSpeed,
             initialProjectileSpeed,
-            projectileName,
+            Color.decode(projectileName),
             level
         );
     }
@@ -77,7 +79,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
         jsonObject.add("initial_speed_attack", new JsonPrimitive(towerConfig.initialAttackSpeed()));
         jsonObject.add("init_projectile_speed", new JsonPrimitive(towerConfig.initialProjectileSpeed()));
         JsonObject projectileConfig = new JsonObject();
-        projectileConfig.add("name", new JsonPrimitive(towerConfig.projectileName()));
+        projectileConfig.add("name", new JsonPrimitive(convertColorToString(towerConfig.projectileName())));
         jsonObject.add("projectile_config", projectileConfig);
         jsonObject.add("open_level", new JsonPrimitive(towerConfig.level()));
         return jsonObject;

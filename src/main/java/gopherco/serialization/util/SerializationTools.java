@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 
 public class SerializationTools {
     private static final String GLOB_TEMPLATE = "*";
-    private static final String ENEMIES_EXTENSION = ".lvl";
-    private static final String LEVELS_EXTENSION = ".enm";
+    private static final String ENEMIES_EXTENSION = ".enm";
+    private static final String LEVELS_EXTENSION = ".lvl";
     private static final String MAPS_EXTENSION = ".map";
     private static final String TOWERS_EXTENSION = ".twr";
     private static final String UI_EXTENSION = ".ui";
@@ -100,6 +100,7 @@ public class SerializationTools {
         }
         Path file = pathToConfigs.resolve(config.getName() + extension);
         try {
+            Files.createDirectories(pathToConfigs);
             Files.createFile(file);
         } catch (FileAlreadyExistsException ignored) {
         }

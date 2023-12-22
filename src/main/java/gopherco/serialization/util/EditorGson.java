@@ -27,6 +27,7 @@ public class EditorGson {
         builder.registerTypeAdapter(MapConfig.class, new MapConfigAdapter());
         builder.registerTypeAdapter(TowerConfig.class, new TowerConfigAdapter());
         builder.registerTypeAdapter(UiConfig.class, new UiConfigAdapter());
+        builder.setPrettyPrinting();
         gson = builder.create();
     }
 

@@ -51,7 +51,7 @@ public class UiConfigAdapter implements JsonSerializer<UiConfig>, JsonDeserializ
         );
         jsonObject.add(
             "MENU_LEFT_SIDEBAR_IMAGE",
-            new JsonPrimitive(convertColorToString(uiConfig.menuLeftSidebarImage()))
+            new JsonPrimitive(convertColorToString(uiConfig.menuLeftSidebarColor()))
         );
         JsonObject uiConfigJson = new JsonObject();
         uiConfigJson.add("colors", jsonObject);

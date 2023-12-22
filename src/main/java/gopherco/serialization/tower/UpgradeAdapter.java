@@ -21,7 +21,7 @@ public class UpgradeAdapter implements JsonSerializer<Upgrade>, JsonDeserializer
         int damageBoost = jsonObject.get("delta_damage").getAsInt();
         int attackSpeedBoost = jsonObject.get("delta_speed_attack").getAsInt();
         double radiusBoost = jsonObject.get("delta_radius").getAsDouble();
-        int level = jsonObject.get("open_level").getAsInt();
+        String level = jsonObject.get("open_level").getAsString();
         return new Upgrade(price, damageBoost, attackSpeedBoost, radiusBoost, level);
     }
 
