@@ -15,9 +15,11 @@ public class EnemyMenuView extends ConfigMenuView<EnemyConfig> {
     private static final String ROOT_MEAN_SQUARE_SPEED_INIT = "Enter RMS speed as a floating point number";
     private static final String ROOT_MONEY_AWARD_INIT = "Enter money award for killing the enemy as an integer";
     private static final String ADD_STRENGTH_INIT =
-        "Enter a strength: 2 integer numbers (first for attack type, second for the value of its decrease) divided by a space";
+        "Enter a strength: 2 integer numbers (first for attack type, second "
+            + "for the value of its decrease) divided by a space";
     private static final String ADD_WEAKNESS_INIT =
-        "Enter a strength: 2 integer numbers (first for attack type, second for the value of its decrease) divided by a space";
+        "Enter a weakness: 2 integer numbers (first for attack type, "
+            + "second for the value of its decrease) divided by a space";
     private static final String NUMBER_ARGS = "Enter exactly 2 numbers";
 
     @Override

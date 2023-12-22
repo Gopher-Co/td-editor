@@ -14,12 +14,14 @@ public class TowerMenuView extends ConfigMenuView<TowerConfig> {
         "Enter initial projectile speed value as a floating point number";
     private static final String ADD_PROJECTILE_NAME_INIT = "Enter projectile color as an integer color code";
     private static final String ADD_UPGRADE_INIT =
-        "Enter upgrade as 4 numbers and a string (int price, int damage boost, int attack speed boos, double radius boost, String), " +
-            "string is either the name of one of the levels (look below) " +
-            "or it's left empty if the upgrade should be open by default";
+        "Enter upgrade as 4 numbers and a string (int price, "
+            + "int damage boost, int attack speed boos, double radius boost, String), "
+            + "string is either the name of one of the levels (look below) "
+            + "or it's left empty if the upgrade should be open by default";
     private static final String ADD_UPGRADE_FAILED_NUMBER_OF_ARGS = "Enter exactly 5 values!";
     private static final String ADD_LEVEL_INIT =
-        "Enter a level name from the list below or leave the string blank if you want the upgrade to be opened by default";
+        "Enter a level name from the list below or leave the string "
+            + "blank if you want the upgrade to be opened by default";
     private static final String INCORRECT_LEVEL = "Incorrect level name";
     private static final String NUMBER_FORMAT = "Incorrect number format";
 

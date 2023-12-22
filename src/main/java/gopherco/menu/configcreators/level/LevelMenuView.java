@@ -8,7 +8,8 @@ import java.util.Set;
 
 public class LevelMenuView extends ConfigMenuView<LevelConfig> {
     private static final String ADD_SWARM_INIT =
-        "Enter a swarm as a string: string name, integer timeout, integer interval, integer maxCalls separated by a single space";
+        "Enter a swarm as a string: string name, integer timeout, "
+            + "integer interval, integer maxCalls separated by a single space";
     private static final String NUMBER_ARGS = "Enter exactly 4 arguments";
     private static final String NUMBER_FORMAT = "Incorrect number format";
     private static final String ADD_MAP_INIT = "Enter a map name from the ones below:";

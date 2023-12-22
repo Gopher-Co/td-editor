@@ -112,6 +112,7 @@ public class TowerMenu extends ConfigMenu<TowerConfig> {
         }
     }
 
+    @SuppressWarnings("MagicNumber")
     private void addUpgrade() {
         var view = getView();
         view.viewAddUpgradeInit();
@@ -190,8 +191,8 @@ public class TowerMenu extends ConfigMenu<TowerConfig> {
 
     @Override
     protected boolean assertFieldsCorrect() {
-        return name != null && price != null && typeAttack != null && initialDamage != null && initialRadius != null &&
-            initialAttackSpeed != null && initialProjectileSpeed != null && projectileName != null && level != null;
+        return name != null && price != null && typeAttack != null && initialDamage != null && initialRadius != null
+            && initialAttackSpeed != null && initialProjectileSpeed != null && projectileName != null && level != null;
     }
 
     @Override

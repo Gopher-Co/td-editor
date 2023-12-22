@@ -31,13 +31,13 @@ public abstract class ConfigMenu<T extends NamedConfig> extends Menu {
     }
 
     protected void addName() {
-        var view = getView();
-        view.viewAddNameInit();
+        var configMenuView = getView();
+        configMenuView.viewAddNameInit();
         String nameInput = readInput();
         if (!nameInput.matches(FILE_REGEX)) {
-            view.viewAddNameWrong();
+            configMenuView.viewAddNameWrong();
         } else if (getConfiguration().getMaps().containsKey(nameInput)) {
-            view.viewAddNameOccupied();
+            configMenuView.viewAddNameOccupied();
         } else {
             this.name = nameInput;
         }
@@ -58,11 +58,11 @@ public abstract class ConfigMenu<T extends NamedConfig> extends Menu {
     protected abstract T getCurrentState();
 
     protected void deleteConfig() {
-        String name = input.read();
-        if (!configs.containsKey(name)) {
+        String configName = input.read();
+        if (!configs.containsKey(configName)) {
             view.viewDeleteConfigFailed();
         } else {
-            configs.remove(name);
+            configs.remove(configName);
             view.viewDeleteConfigSuccess();
         }
     }

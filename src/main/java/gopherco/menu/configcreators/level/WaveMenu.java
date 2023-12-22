@@ -29,19 +29,23 @@ public class WaveMenu extends Menu {
         this.target = target;
     }
 
+    @SuppressWarnings("MagicNumber")
     private void addSwarm() {
         view.addSwarmInit();
         String[] parameters = readInput().split(" +");
         if (parameters.length != 4) {
             view.viewFailedNumberOfArgs();
-            return;
-        }
-        if (!parameters[0].matches(FILE_REGEX)) {
+        } else if (!parameters[0].matches(FILE_REGEX)) {
             view.viewAddNameWrong();
             return;
         }
         try {
-            swarms.add(new Swarm(parameters[0], Integer.parseInt(parameters[1]), Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3])));
+            swarms.add(new Swarm(
+                parameters[0],
+                Integer.parseInt(parameters[1]),
+                Integer.parseInt(parameters[2]),
+                Integer.parseInt(parameters[3])
+            ));
         } catch (NumberFormatException e) {
             view.viewFailedNumberFormat();
         }

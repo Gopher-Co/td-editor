@@ -66,9 +66,9 @@ public class EnemyMenu extends ConfigMenu<EnemyConfig> {
     private void addMoneyAward() {
         var view = getView();
         view.viewMoneyAwardInit();
-        String moneyAward = readInput();
+        String moneyAwardInput = readInput();
         try {
-            this.moneyAward = Integer.parseInt(moneyAward);
+            this.moneyAward = Integer.parseInt(moneyAwardInput);
         } catch (NumberFormatException e) {
             view.viewNumberFormatIncorrect();
         }

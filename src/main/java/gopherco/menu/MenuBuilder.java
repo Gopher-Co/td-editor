@@ -66,7 +66,14 @@ public class MenuBuilder {
         return mainMenu;
     }
 
-    private void setupMainMenu(Menu mainMenu, Menu mapMenu, Menu uiMenu, Menu enemyMenu, Menu levelMenu, Menu towerMenu) {
+    private void setupMainMenu(
+        Menu mainMenu,
+        Menu mapMenu,
+        Menu uiMenu,
+        Menu enemyMenu,
+        Menu levelMenu,
+        Menu towerMenu
+    ) {
         itemInserter
             .add(new ForthItem(MAP_MENU, mapMenu))
             .add(new ForthItem(UI_MENU, uiMenu))

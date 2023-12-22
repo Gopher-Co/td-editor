@@ -2,7 +2,6 @@ package gopherco.menu.configcreators;
 
 import gopherco.configs.NamedConfig;
 import java.util.Collection;
-import java.util.Set;
 
 public abstract class ConfigMenuView<T extends NamedConfig> {
     private static final String ADD_NAME_INIT = "Enter a config name. Use latin letters, digits and underscore only";
