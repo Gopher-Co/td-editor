@@ -37,10 +37,9 @@ public final class MapMenu extends ConfigMenu<MapConfig> {
     private Point takePoint() {
         var view = getView();
         view.viewTakePointInit();
-        String[] numbers = readInput().split(" ");
+        String[] numbers = readInput().split(" +");
         if (numbers.length != 2) {
             view.viewTakePointFailedNumberOfArgs();
-            throw new IllegalStateException();
         }
         try {
             return new Point(Double.parseDouble(numbers[0]), Double.parseDouble(numbers[1]));

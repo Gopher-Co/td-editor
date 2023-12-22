@@ -77,32 +77,28 @@ public class EnemyMenu extends ConfigMenu<EnemyConfig> {
     private void addStrength() {
         var view = getView();
         view.viewStrengthInit();
-        String[] numbers = readInput().split(" ");
+        String[] numbers = readInput().split(" +");
         if (numbers.length != 2) {
             view.viewAddStrengthFailedNumberOfArgs();
-            throw new IllegalStateException();
         }
         try {
             strengths.add(new Strength(Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1])));
         } catch (NumberFormatException e) {
             view.viewNumberFormatIncorrect();
-            throw new IllegalStateException();
         }
     }
 
     private void addWeakness() {
         var view = getView();
         view.viewWeaknessInit();
-        String[] numbers = readInput().split(" ");
+        String[] numbers = readInput().split(" +");
         if (numbers.length != 2) {
             view.viewAddWeaknessFailedNumberOfArgs();
-            throw new IllegalStateException();
         }
         try {
             strengths.add(new Strength(Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1])));
         } catch (NumberFormatException e) {
             view.viewNumberFormatIncorrect();
-            throw new IllegalStateException();
         }
     }
 

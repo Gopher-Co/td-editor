@@ -39,6 +39,8 @@ public class LevelMenu extends ConfigMenu<LevelConfig> {
     @Override
     protected void clearState() {
         waves = new ArrayList<>();
+        mapName = null;
+        name = null;
     }
 
     @Override
