@@ -3,6 +3,7 @@ package gopherco.menu.configcreators.tower;
 import gopherco.configs.tower.TowerConfig;
 import gopherco.menu.configcreators.ConfigMenuView;
 import java.util.Set;
+import static java.lang.System.lineSeparator;
 
 public class TowerMenuView extends ConfigMenuView<TowerConfig> {
     private static final String ADD_PRICE_INIT = "Enter price as an integer";
@@ -14,8 +15,8 @@ public class TowerMenuView extends ConfigMenuView<TowerConfig> {
         "Enter initial projectile speed value as a floating point number";
     private static final String ADD_PROJECTILE_NAME_INIT = "Enter projectile color as an integer color code";
     private static final String ADD_UPGRADE_INIT =
-        "Enter upgrade as 4 numbers and a string (int price, "
-            + "int damage boost, int attack speed boos, double radius boost, String), "
+        "Enter upgrade as 4 numbers and a string" + lineSeparator()
+            + "int price, int damage boost, int attack speed boos, double radius boost, String level" + lineSeparator()
             + "string is either the name of one of the levels (look below) "
             + "or it's left empty if the upgrade should be open by default";
     private static final String ADD_UPGRADE_FAILED_NUMBER_OF_ARGS = "Enter exactly 5 values!";
@@ -28,16 +29,16 @@ public class TowerMenuView extends ConfigMenuView<TowerConfig> {
     @Override
     public void viewConfig(TowerConfig config) {
         System.out.println();
-        System.out.println(config.name());
-        System.out.println(config.upgrades());
-        System.out.println(config.price());
-        System.out.println(config.typeAttack());
-        System.out.println(config.initialDamage());
-        System.out.println(config.initialRadius());
-        System.out.println(config.initialAttackSpeed());
-        System.out.println(config.initialProjectileSpeed());
-        System.out.println(config.projectileName());
-        System.out.println(config.level());
+        System.out.println("Tower name: " + config.name());
+        System.out.println("Upgrades: " + config.upgrades());
+        System.out.println("Price: " + config.price());
+        System.out.println("Attack type: " + config.typeAttack());
+        System.out.println("Initial damage: " + config.initialDamage());
+        System.out.println("Initial radius: " + config.initialRadius());
+        System.out.println("Initial attack speed: " + config.initialAttackSpeed());
+        System.out.println("Initial projectile speed: " + config.initialProjectileSpeed());
+        System.out.println("Projectile color: " + config.projectileName());
+        System.out.println("Opening level: " + config.level());
     }
 
     public void viewAddPriceInit() {
