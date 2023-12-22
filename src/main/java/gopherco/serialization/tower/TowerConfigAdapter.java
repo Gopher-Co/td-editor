@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import static gopherco.serialization.util.SerializationTools.convertColorToString;
 
 @SuppressWarnings("MultipleStringLiterals")
 public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDeserializer<TowerConfig> {
@@ -78,7 +79,7 @@ public class TowerConfigAdapter implements JsonSerializer<TowerConfig>, JsonDese
         jsonObject.add("initial_speed_attack", new JsonPrimitive(towerConfig.initialAttackSpeed()));
         jsonObject.add("init_projectile_speed", new JsonPrimitive(towerConfig.initialProjectileSpeed()));
         JsonObject projectileConfig = new JsonObject();
-        projectileConfig.add("name", new JsonPrimitive(towerConfig.projectileName().toString()));
+        projectileConfig.add("name", new JsonPrimitive(convertColorToString(towerConfig.projectileName())));
         jsonObject.add("projectile_config", projectileConfig);
         jsonObject.add("open_level", new JsonPrimitive(towerConfig.level()));
         return jsonObject;
