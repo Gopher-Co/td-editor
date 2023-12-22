@@ -5,7 +5,10 @@ import gopherco.configs.level.LevelConfig;
 import gopherco.configs.map.MapConfig;
 import gopherco.configs.tower.TowerConfig;
 import gopherco.configs.ui.UiConfig;
+
+import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import static gopherco.serialization.util.SerializationTools.loadEnemies;
@@ -40,22 +43,21 @@ public class Configuration {
     private UiConfig ui;
 
     private Configuration() {
-//        try {
-//            pathToJar = Paths.get(Test.class.getProtectionDomain().getCodeSource().getLocation()
-//                .toURI());
-        pathToJar = Path.of(getProperty("user.dir"));
-        pathToEnemies = pathToJar.resolve(ENEMIES_FOLDER);
-        pathToLevels = pathToJar.resolve(LEVELS_FOLDER);
-        pathToMaps = pathToJar.resolve(MAPS_FOLDER);
-        pathToTowers = pathToJar.resolve(TOWERS_FOLDER);
-        pathToUi = pathToJar.resolve(UI_FOLDER);
-        enemies = new HashMap<>();
-        levels = new HashMap<>();
-        maps = new HashMap<>();
-        towers = new HashMap<>();
-//        } catch (URISyntaxException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            pathToJar = Paths.get(Configuration.class.getProtectionDomain().getCodeSource().getLocation()
+                .toURI()).getParent();
+            pathToEnemies = pathToJar.resolve(ENEMIES_FOLDER);
+            pathToLevels = pathToJar.resolve(LEVELS_FOLDER);
+            pathToMaps = pathToJar.resolve(MAPS_FOLDER);
+            pathToTowers = pathToJar.resolve(TOWERS_FOLDER);
+            pathToUi = pathToJar.resolve(UI_FOLDER);
+            enemies = new HashMap<>();
+            levels = new HashMap<>();
+            maps = new HashMap<>();
+            towers = new HashMap<>();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Configuration getInstance() {
