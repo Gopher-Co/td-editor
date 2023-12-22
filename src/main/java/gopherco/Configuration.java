@@ -5,7 +5,6 @@ import gopherco.configs.level.LevelConfig;
 import gopherco.configs.map.MapConfig;
 import gopherco.configs.tower.TowerConfig;
 import gopherco.configs.ui.UiConfig;
-
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,7 +20,6 @@ import static gopherco.serialization.util.SerializationTools.saveLevels;
 import static gopherco.serialization.util.SerializationTools.saveMaps;
 import static gopherco.serialization.util.SerializationTools.saveTowers;
 import static gopherco.serialization.util.SerializationTools.saveUi;
-import static java.lang.System.getProperty;
 
 public class Configuration {
     private static final String ENEMIES_FOLDER = "Enemies";
